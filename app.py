@@ -15,14 +15,10 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        # These are the 8 fields used in your HTML form
         fields = ['2B', '3B', 'BB', 'SO', 'SB', 'CG', 'SHO', 'E']
-        
-        # Collect input values from form
         input_features = [float(request.form[field]) for field in fields]
-        final_input = [input_features]  # model expects a 2D array
+        final_input = [input_features]  # plain Python list of lists
 
-        # Predict using the model
         predicted_wins = model.predict(final_input)[0]
         return render_template('index.html', prediction_text=f"Predicted Wins: {round(predicted_wins, 2)}")
     
