@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Baseball Wins Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 1.5em;
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Baseball Team Wins Prediction (2015)</h2>
+        <form action="/predict" method="post">
+            <label>Doubles (2B):</label><input type="number" name="2B" step="any" required>
+            <label>Triples (3B):</label><input type="number" name="3B" step="any" required>
+            <label>Walks (BB):</label><input type="number" name="BB" step="any" required>
+            <label>Strikeouts (SO):</label><input type="number" name="SO" step="any" required>
+            <label>Stolen Bases (SB):</label><input type="number" name="SB" step="any" required>
+            <label>Complete Games (CG):</label><input type="number" name="CG" step="any" required>
+            <label>Shutouts (SHO):</label><input type="number" name="SHO" step="any" required>
+            <label>Errors (E):</label><input type="number" name="E" step="any" required>
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
