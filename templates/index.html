@@ -1,4 +1,3 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,28 +67,28 @@
         <h2>Baseball Win Score Prediction</h2>
         <form method="POST" action="/predict">
             <label>2B (Double):</label>
-            <input type="number" name="2B" step="any" required>
+            <input type="number" name="2B" step="any" placeholder="e.g., 30" required>
 
             <label>3B (Triple):</label>
-            <input type="number" name="3B" step="any" required>
+            <input type="number" name="3B" step="any" placeholder="e.g., 5" required>
 
             <label>BB (Base on Balls/Walks):</label>
-            <input type="number" name="BB" step="any" required>
+            <input type="number" name="BB" step="any" placeholder="e.g., 60" required>
 
             <label>SO (Strikeouts):</label>
-            <input type="number" name="SO" step="any" required>
+            <input type="number" name="SO" step="any" placeholder="e.g., 120" required>
 
             <label>SB (Stolen Bases):</label>
-            <input type="number" name="SB" step="any" required>
+            <input type="number" name="SB" step="any" placeholder="e.g., 25" required>
 
             <label>CG (Complete Games):</label>
-            <input type="number" name="CG" step="any" required>
+            <input type="number" name="CG" step="any" placeholder="e.g., 2" required>
 
             <label>SHO (Shutouts):</label>
-            <input type="number" name="SHO" step="any" required>
+            <input type="number" name="SHO" step="any" placeholder="e.g., 1" required>
 
             <label>E (Errors):</label>
-            <input type="number" name="E" step="any" required>
+            <input type="number" name="E" step="any" placeholder="e.g., 15" required>
 
             <button type="submit">Predict</button>
         </form>
