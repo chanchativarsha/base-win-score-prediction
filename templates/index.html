@@ -1,29 +1,102 @@
-from flask import Flask, request, render_template
-import numpy as np
-import joblib
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Baseball Win Score Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 40px;
+        }
 
-app = Flask(__name__)
-model = joblib.load('Wins-Score.pkl')
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    try:
-        # Use get() to safely retrieve values; convert to float
-        features = [
-            float(request.form.get('2B', 0)),
-            float(request.form.get('3B', 0)),
-            float(request.form.get('BB', 0)),
-            float(request.form.get('SO', 0)),
-            float(request.form.get('SB', 0)),
-            float(request.form.get('CG', 0)),
-            float(request.form.get('SHO', 0)),
-            float(request.form.get('E', 0))
-        ]
-        prediction = model.predict([features])
-        return render_template('index.html', prediction_text=f'Predicted Wins: {int(prediction[0])}')
-    except Exception as e:
-        return f"Error during prediction: {e}", 400
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 20px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Baseball Win Score Prediction</h2>
+        <form method="POST" action="/predict">
+            <label>2B (Double):</label>
+            <input type="number" name="2B" step="any" required>
+
+            <label>3B (Triple):</label>
+            <input type="number" name="3B" step="any" required>
+
+            <label>BB (Base on Balls/Walks):</label>
+            <input type="number" name="BB" step="any" required>
+
+            <label>SO (Strikeouts):</label>
+            <input type="number" name="SO" step="any" required>
+
+            <label>SB (Stolen Bases):</label>
+            <input type="number" name="SB" step="any" required>
+
+            <label>CG (Complete Games):</label>
+            <input type="number" name="CG" step="any" required>
+
+            <label>SHO (Shutouts):</label>
+            <input type="number" name="SHO" step="any" required>
+
+            <label>E (Errors):</label>
+            <input type="number" name="E" step="any" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
